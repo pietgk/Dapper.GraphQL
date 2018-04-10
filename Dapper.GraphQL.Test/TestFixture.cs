@@ -114,7 +114,8 @@ namespace Dapper.GraphQL.Test
             // Generate a random db name
             var dbName = "test-" + new string(chars.OrderBy(c => random.Next()).ToArray());
 
-            var connectionString = $"Server=(localdb)\\mssqllocaldb;Integrated Security=true;MultipleActiveResultSets=true;Database={dbName}";
+            // var connectionString = $"Server=(localdb)\\mssqllocaldb;Integrated Security=true;MultipleActiveResultSets=true;Database={dbName}";
+            var connectionString = $"Data Source=localhost,1402;User ID=SA;Password=MyNiceW8w00rd;Initial Catalog={dbName};";
 
             // Ensure the database exists
             EnsureDatabase.For.SqlDatabase(connectionString);

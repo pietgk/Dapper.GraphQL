@@ -25,6 +25,8 @@ namespace Dapper.GraphQL.Test
             
             // Ensure inserting a person works and we get the person's Id back
             int personId;
+            int emailId;
+            int phoneId;
             using (var db = fixture.GetDbConnection())
             {
                 personId = SqlBuilder
@@ -56,6 +58,7 @@ namespace Dapper.GraphQL.Test
                 // Ensure both were inserted properly
                 Assert.Equal(2, insertedCount);
 
+                
                 // Build an identity mapper for person
                 var personMapper = fixture.BuildMapper<Person>(p => p.Id);
 
@@ -106,7 +109,6 @@ namespace Dapper.GraphQL.Test
                 personId = await SqlBuilder
                     .Insert(person)
                     .ExecuteWithSqlIdentityAsync<int>(db);
-            }
 
             Assert.True(personId > 0);
 
@@ -125,9 +127,6 @@ namespace Dapper.GraphQL.Test
 
             // Add email and phone number to the person
             int insertedCount;
-            using (var db = fixture.GetDbConnection())
-            {
-                db.Open();
 
                 insertedCount = await SqlBuilder
                     .Insert(email)
